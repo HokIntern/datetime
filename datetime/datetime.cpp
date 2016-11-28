@@ -39,7 +39,7 @@ void seconds_from_epoch(const std::string& s)
 	std::cout << " seconds from epoch are " << pt_to_time_t(pt) << '\n';
 }
 */
-const std::locale inputs[] = {
+std::locale inputs[] = {
 	std::locale(std::locale::classic(), new bt::time_input_facet("%m/%d/%Y")),
 	std::locale(std::locale::classic(), new bt::time_input_facet("%Y-%m-%d %H:%M:%S")),
 	std::locale(std::locale::classic(), new bt::time_input_facet("%Y%m%d%H%M%S")),
@@ -67,11 +67,17 @@ int main()
 
 	bt::ptime this_time;
 	std::locale temp2 = std::locale(std::locale::classic(), new bt::time_input_facet("%Y-%m-%d %H:%M:%S"));
-	temp2 = inputs[1];
 	std::istringstream ss(msg);
 	ss.imbue(temp2);
 	ss >> this_time;
 	std::cout << this_time << std::endl;
+
+	bt::ptime this_time2;
+	std::locale temp3 = inputs[1];
+	std::istringstream jss(msg);
+	jss.imbue(temp3);
+	jss >> this_time2;
+	std::cout << this_time2 << std::endl;
 
 	/*
 	for (size_t i = 0; i<formats; ++i)
